@@ -1,0 +1,37 @@
+.container {
+    width: 360px !important;
+    margin:0 auto;
+}
+.p1{
+    font-weight: bold;
+    font-size: 25px;
+}
+.p2{
+    font-weight: bold;
+    font-size: 20px;
+}
+.p3{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+body{
+    margin: 0;
+}
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    margin:0;
+    padding:0;
+    list-style: none;
+    position: fixed;
+    bottom: 0;
+}
+.nav-item {
+    padding: 27px;
+    cursor: pointer;
+}
+.nav-item a {
+    text-align: center;
+    text-decoration: none;
+}
