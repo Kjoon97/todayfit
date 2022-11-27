@@ -10,12 +10,13 @@
   <div class="logoImg"><img th:src="@{/img/logo.png}"></div>
   <p>로그인</p>
   <br>
-  <form>
+<!-- /auth/login을 securityConfig가 가로채서 -> PrincipalDetailService 동작, 중요: input에 name을 보고 user와 매치시킴.-->
+  <form action="/auth/login" method="post">
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="이메일" id="email">
+      <input type="text" class="form-control" placeholder="이메일" name="username" id="username">
     </div>
     <div class="form-group">
-      <input type="password" class="form-control" placeholder="패스워드" id="password">
+      <input type="password" class="form-control" placeholder="패스워드" name="password" id="password">
     </div>
     <hr class="my-4">
     <button class="button_1" type="submit">로그인</button>
