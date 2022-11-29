@@ -15,6 +15,11 @@
         <button class="w-100 btn btn-secondary btn-lg"
                 th:onclick="|location.href='@{/}'|"
                 type="button">내 정보 수정</button>
+        <br>
+        <br>
+        <button class="w-100 btn btn-secondary btn-lg"
+                th:onclick="|location.href='@{/logout}'|"
+                type="button">로그 아웃</button>
       </p>
     </div>
   </div>
@@ -26,7 +31,6 @@
       <li class="nav-item" style="margin-left: 35px;"><a th:href="@{/my-page}"><img th:src="@{/img/m3_color.png}"></a></li>
     </ul>
   </nav>
-  
 </div>
 </body>
 </html>
