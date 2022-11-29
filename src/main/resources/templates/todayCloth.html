@@ -3,23 +3,68 @@
 <!--  <link rel="stylesheet" href="/frontend/css/todaycloth.css">-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <link rel ="stylesheet" th:href="@{/css/todaycloth.css}">
+    <style>
+        .wrapper{
+            max-height: 150px;
+            border: 1px solid #ddd;
+            display: flex;
+            overflow-x: auto;
+        }
+
+        .wrapper::-webkit-scrollbar{
+            width: 5px;
+        }
+        .wrapper::-webkit-scrollbar-thumb{
+            background-color: #6C63FF;
+            background-clip: padding-box;
+            border: 4px solid transparent;
+            border-top-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+        .wrapper::-webkit-scrollbar-track{
+            background-color: white;
+        }
+
+        .wrapper .item{
+            min-width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background-color: #ddd;
+            margin-right: 2px;
+        }
+    </style>
 </head>
 
 <body>
 <br/><br/>
 <div class="container">
   <p class="p1">오늘의 옷</p>
-  <div class="card" style="height:30rem;">
+  <div class="card" style="height:32rem;">
     <div class="card-body">
       <p class="card-text" style="text-align: center; color:6C63FF">
         <p class="p2">오늘의 온도는 <span th:text="|${temp}도|" style="color:red;"></span>입니다</p>
-  <br>
+        <div class="div" style="height:200px;">
       <p class="p3">오늘 입기 좋은 상의는?</p>
-      <img th:src="@{/img/jeans.png}" width="100px">
-      <span>아우터입니다.</span>
+            <div class="wrapper">
+                <tr th:each="top : ${tops}">
+                    <div style="text-align:center;">
+                    <img src="http://jparkers.godohosting.com/upload/item/jean2022Bl_list_01.jpg" width="80px"><br>
+                    <td th:class="item" th:text="${top}"></td>
+                    </div>
+                </tr>
+            </div>
+            <Br>
       <p class="p3">오늘 입기 좋은 하의는?</p>
-      <img th:src="@{/img/shirt.png}" width="100px">
-      <span>긴바지입니다.</span>
+            <div class="wrapper">
+                <tr th:each="pant : ${pants}">
+                    <div style="text-align:center;">
+                        <img src="img/jeans.png" width="80px"><br>
+                        <td th:class="item" th:text="${pant}"></td>
+                    </div>
+                </tr>
+            </div>
+        </div>
   <br>
     </div>
   </div>

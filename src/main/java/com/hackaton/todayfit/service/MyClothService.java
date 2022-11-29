@@ -19,7 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ClothService {
+public class MyClothService {
 
     private final ClothCheckRepository clothCheckRepository;
     private final Translate translate;

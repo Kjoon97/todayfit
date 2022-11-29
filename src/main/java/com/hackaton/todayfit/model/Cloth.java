@@ -17,15 +17,15 @@ public class Cloth {
 
     private String category;
 
-    private double lowestTemperature;
+    private float lowestTemperature;
 
-    private double highTemperature;
+    private float highTemperature;
 
     private String imgUrl;
 
     private String type;
 
-    public void setCloth(String category, double lowestTemperature, double highTemperature, String imgUrl, String type){
+    public void setCloth(String category, float lowestTemperature, float highTemperature, String imgUrl, String type){
         this.category =category;
         this.lowestTemperature = lowestTemperature;
         this.highTemperature = highTemperature;
