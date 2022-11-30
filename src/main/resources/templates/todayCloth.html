@@ -3,37 +3,6 @@
 <!--  <link rel="stylesheet" href="/frontend/css/todaycloth.css">-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <link rel ="stylesheet" th:href="@{/css/todaycloth.css}">
-    <style>
-        .wrapper{
-            max-height: 150px;
-            border: 1px solid #ddd;
-            display: flex;
-            overflow-x: auto;
-        }
-
-        .wrapper::-webkit-scrollbar{
-            width: 5px;
-        }
-        .wrapper::-webkit-scrollbar-thumb{
-            background-color: #6C63FF;
-            background-clip: padding-box;
-            border: 4px solid transparent;
-            border-top-left-radius: 50px;
-            border-bottom-right-radius: 50px;
-        }
-        .wrapper::-webkit-scrollbar-track{
-            background-color: white;
-        }
-
-        .wrapper .item{
-            min-width: 100px;
-            height: 100px;
-            line-height: 100px;
-            text-align: center;
-            background-color: #ddd;
-            margin-right: 2px;
-        }
-    </style>
 </head>
 
 <body>
@@ -49,8 +18,8 @@
             <div class="wrapper">
                 <tr th:each="top : ${tops}">
                     <div style="text-align:center;">
-                    <img src="http://jparkers.godohosting.com/upload/item/jean2022Bl_list_01.jpg" width="80px"><br>
-                    <td th:class="item" th:text="${top}"></td>
+                    <img th:src="${top.imgUrl}" width="80px" height="96px"><br>
+                    <td th:class="item" th:text="${top.category}"></td>
                     </div>
                 </tr>
             </div>
@@ -59,8 +28,8 @@
             <div class="wrapper">
                 <tr th:each="pant : ${pants}">
                     <div style="text-align:center;">
-                        <img src="img/jeans.png" width="80px"><br>
-                        <td th:class="item" th:text="${pant}"></td>
+                        <img th:src="${pant.imgUrl}" width="80px" height="96px"><br>
+                        <td th:class="item" th:text="${pant.category}"></td>
                     </div>
                 </tr>
             </div>

@@ -2,6 +2,7 @@ package com.hackaton.todayfit.service;
 
 import com.hackaton.todayfit.config.auth.PrincipalDetails;
 import com.hackaton.todayfit.dto.OpenWeather;
+import com.hackaton.todayfit.dto.RecommendClothDTO;
 import com.hackaton.todayfit.dto.Translate;
 import com.hackaton.todayfit.model.CheckCloth;
 import com.hackaton.todayfit.model.Cloth;
@@ -49,10 +50,10 @@ public class TodayClothService {
         }
     }
 
-    public ArrayList<List<String>> getRecommendCloth(float temp, PrincipalDetails principal){
+    public ArrayList<List<RecommendClothDTO>> getRecommendCloth(float temp, PrincipalDetails principal){
         User user = userRepository.findByEmail(principal.getUsername());
-        ArrayList<String> recommendTopClothes = new ArrayList<>();
-        ArrayList<String> recommendPantsClothes = new ArrayList<>();
+        ArrayList<RecommendClothDTO> recommendTopClothes = new ArrayList<>();
+        ArrayList<RecommendClothDTO> recommendPantsClothes = new ArrayList<>();
 
         //체크한 카테고리들.
         List<String> checkedClothes = clothCheckRepository.findCategories(user.getId());
@@ -61,17 +62,25 @@ public class TodayClothService {
         List<Cloth> recommendClothes = clothRepository.findRecommendClothes(temp);
         for (Cloth recommendCloth : recommendClothes) {
             if(checkedClothes.contains(recommendCloth.getCategory())){
-                String cloth = translate.translate().get(recommendCloth.getCategory());
-                if (recommendCloth.getType().equals("상의")){
-                    recommendTopClothes.add(cloth);
+                if(recommendCloth.getType().equals("상의")){
+                    String category = translate.translate().get(recommendCloth.getCategory());
+                    String imgUrl = recommendCloth.getImgUrl();
+                    RecommendClothDTO recommendClothDTO = new RecommendClothDTO(category,imgUrl);
+                    recommendTopClothes.add(recommendClothDTO);
                 }else{
-                    recommendPantsClothes.add(cloth);
+                    String category = translate.translate().get(recommendCloth.getCategory());
+                    String imgUrl = recommendCloth.getImgUrl();
+                    RecommendClothDTO recommendClothDTO = new RecommendClothDTO(category,imgUrl);
+                    recommendPantsClothes.add(recommendClothDTO);
                 }
             }
         }
-        ArrayList<List<String>> recommend = new ArrayList<>();
+        System.out.println("recommendPantsClothes = " + recommendPantsClothes);
+        System.out.println("recommendTopClothes = " + recommendTopClothes);
+        ArrayList<List<RecommendClothDTO>> recommend = new ArrayList<>();
         recommend.add(recommendTopClothes);
         recommend.add(recommendPantsClothes);
+        System.out.println("recommend = " + recommend);
         return recommend;
     }
 

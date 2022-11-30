@@ -2,6 +2,7 @@ package com.hackaton.todayfit.controller;
 
 import com.hackaton.todayfit.config.auth.PrincipalDetails;
 import com.hackaton.todayfit.dto.OpenWeather;
+import com.hackaton.todayfit.dto.RecommendClothDTO;
 import com.hackaton.todayfit.service.TodayClothService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,11 +21,16 @@ public class TodayClothController {
 
     private final TodayClothService todayClothService;
 
+    @GetMapping("/")
+    public String home(){
+        return "redirect:/today-clothes";
+    }
+
     @GetMapping("/today-clothes")
     public String todayClothes(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
         Float temperature = todayClothService.getWeatherInfo();
         model.addAttribute("temp",temperature);
-        ArrayList<List<String>> recommendCloth = todayClothService.getRecommendCloth(temperature, principal);
+        ArrayList<List<RecommendClothDTO>> recommendCloth = todayClothService.getRecommendCloth(temperature, principal);
         System.out.println("recommendCloth = " + recommendCloth);
         model.addAttribute("tops", recommendCloth.get(0));
         model.addAttribute("pants",recommendCloth.get(1));
