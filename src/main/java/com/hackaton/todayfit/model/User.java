@@ -42,8 +42,8 @@ public class User {
     }
 
     //회원 수정 시 사용.
-    public void setPwdAndEmail(String password, String email){
-        this.email = email;
+    public void setPwdAndNickname(String password, String nickname){
         this.password = password;
+        this.nickname = nickname;
     }
 }
