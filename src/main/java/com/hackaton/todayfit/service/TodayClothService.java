@@ -30,10 +30,18 @@ public class TodayClothService {
     private final ClothRepository clothRepository;
     private final Translate translate;
 
-    public Float getWeatherInfo(){
+    public String getRegionInfo(PrincipalDetails principal){
+        User user = userRepository.findByEmail(principal.getUsername());
+        String region = user.getRegion();
+        return region;
+    }
+
+    public Float getWeatherInfo(PrincipalDetails principal){
+        User user = userRepository.findByEmail(principal.getUsername());
+        String region = user.getRegion();
         StringBuilder urlBuilder = new StringBuilder(BASE_URL);
         try {
-            urlBuilder.append("?" + URLEncoder.encode("q", "UTF-8") + "=seoul");
+            urlBuilder.append("?" + URLEncoder.encode("q", "UTF-8") + "="+region);
             urlBuilder.append("&" + URLEncoder.encode("appid", "UTF-8") + "=" + apiKey);
             urlBuilder.append("&" + URLEncoder.encode("lang", "UTF-8") + "=kr");
             urlBuilder.append("&" + URLEncoder.encode("units", "UTF-8") + "=metric");
@@ -41,7 +49,6 @@ public class TodayClothService {
             OpenWeather response = restTemplate.getForObject(urlBuilder.toString(), OpenWeather.class);
             System.out.println("response = " + response.getMain().getTemp());
             System.out.println(response);
-
             return response.getMain().getTemp();
 
         } catch (Exception e) {

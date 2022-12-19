@@ -29,7 +29,7 @@ public class UserService {
     //회원 조회
     public UserInfoDto findUser(PrincipalDetails principal){
         User userEntity = userRepository.findByEmail(principal.getUsername());
-        UserInfoDto userInfoDto = new UserInfoDto(userEntity.getId(),userEntity.getEmail(), userEntity.getPassword(), userEntity.getNickname());
+        UserInfoDto userInfoDto = new UserInfoDto(userEntity.getId(),userEntity.getEmail(), userEntity.getPassword(), userEntity.getNickname(), userEntity.getRegion());
         return userInfoDto;
     }
 
@@ -47,6 +47,14 @@ public class UserService {
         String rawPwd = user.getPassword();
         String encodePwd = encoder.encode(rawPwd);
         persistenceUser.setPwdAndNickname(encodePwd,user.getNickname());
+    }
+
+    @Transactional
+    public void updateRegion(UserInfoDto user){
+        User persistenceUser = userRepository.findById(user.getId()).orElseThrow(()-> {
+            return new IllegalArgumentException("회원 찾기 실패");
+        });
+        persistenceUser.setterRegion(user.getRegion());
     }
 
 }

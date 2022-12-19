@@ -36,11 +36,19 @@ public class UserApiController {
     @PutMapping("/user")
     public ResponseDto<Integer> update(@RequestBody UserInfoDto userInfoDto){
         System.out.println("/////////////////////user = " + userInfoDto.getNickname());
+        System.out.println("userInfoDto = " + userInfoDto.getRegion());
         userService.userUpdate(userInfoDto);
 
         //세션 등록
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userInfoDto.getEmail(), userInfoDto.getPassword()));  //Authentication 생성.
         SecurityContextHolder.getContext().setAuthentication(authentication);              //세션에 Authentication 등록.
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
+
+    //지역 수정
+    @PutMapping("/region")
+    public ResponseDto<Integer> regionUpdate(@RequestBody UserInfoDto userInfoDto){
+        userService.updateRegion(userInfoDto);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 }

@@ -6,6 +6,9 @@ let index ={
           $("#btn-update").on("click",()=>{   //'회원수정' 버튼 클릭하면 해당 함수 호출 됨.
                 this.update();
           });
+          $("#btn-region-update").on("click",()=>{   //'회원수정' 버튼 클릭하면 해당 함수 호출 됨.
+                this.regionUpdate();
+          });
      },
 
      save: function(){
@@ -13,7 +16,8 @@ let index ={
          let data = {
                nickname: $("#nickname").val(),
                password: $("#password").val(),
-               email: $("#email").val()
+               email: $("#email").val(),
+               region: $('#region').val()
          };
          console.log(data)
 
@@ -53,7 +57,30 @@ let index ={
            }).fail(function(error){
                 alert(JSON.stringify(error));
            });
-           }
+     },
+
+     regionUpdate: function(){
+                let data = {
+                    id: $("#id").val(),
+                    email: $("#email").val(),
+                    password: $("#password").val(),
+                    nickname: $("#nickname").val(),
+                    region: $("#region").val()
+                };
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/region",
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                }).done(function(resp){
+                     alert("지역 수정이 완료 되었습니다.");
+                     location.href ="/my-page";
+                }).fail(function(error){
+                     alert(JSON.stringify(error));
+                });
+          },
 
 }
 

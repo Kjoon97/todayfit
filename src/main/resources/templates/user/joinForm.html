@@ -21,6 +21,12 @@
     <div class="form-group">
       <input type="text" class="form-control" placeholder="닉네임" id="nickname">
     </div>
+    <!-- 지역 선택   -->
+    <div>
+      <select th:field="*{regionCodes}" class="form-control" id="region" name="region">
+        <option th:each="regionCode : ${regionCodes}" th:value="${regionCode.eName}" th:text="${regionCode.kName}"></option>
+      </select>
+    </div>
   </form>
   <hr class="my-4">
   <button id="btn-save" class="button_1" type="submit">회원 가입</button>

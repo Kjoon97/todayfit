@@ -32,6 +32,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private RoleType role;
 
+    private String region;
+
     @CreationTimestamp
     private Timestamp createDate;            //repository.save() 후-> 데이터 createDate에 저장 후 -> db에 insert.
 
@@ -45,5 +47,10 @@ public class User {
     public void setPwdAndNickname(String password, String nickname){
         this.password = password;
         this.nickname = nickname;
+    }
+
+    //지역 수정시 사용
+    public void setterRegion(String region){
+        this.region = region;
     }
 }

@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <link rel ="stylesheet" th:href="@{/css/todaycloth.css}">
+  <link rel ="stylesheet" th:href="@{/css/myPage.css}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 
@@ -12,12 +12,17 @@
   <div class="card" style="height:30rem;">
     <div class="card-body">
       <p class="card-text" style="text-align: center; color:6C63FF; padding: 100px 0px;">
-        <button class="w-100 btn btn-secondary btn-lg"
+        <button class="button_1"
                 th:onclick="|location.href='@{/user/updateForm}'|"
-                type="button">내 정보 수정</button>
+                type="button">내 계정 수정</button>
         <br>
         <br>
-        <button class="w-100 btn btn-secondary btn-lg"
+        <button class="button_1"
+                th:onclick="|location.href='@{/user/updateRegion}'|"
+                type="button">지역 수정</button>
+        <br>
+        <br>
+        <button class="button_1"
                 th:onclick="|location.href='@{/logout}'|"
                 type="button">로그 아웃</button>
       </p>
