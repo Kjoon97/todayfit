@@ -16,4 +16,5 @@ public interface ClothCheckRepository extends JpaRepository<CheckCloth, Integer>
     @Query(value = "select category from checkcloth where user_id = ?", nativeQuery = true)
     List<String> findCategories(int userId);
 
+    void deleteAllByUserId(int userId);
 }

@@ -3,18 +3,14 @@ package com.hackaton.todayfit.service;
 import com.hackaton.todayfit.config.auth.PrincipalDetails;
 import com.hackaton.todayfit.dto.Translate;
 import com.hackaton.todayfit.model.CheckCloth;
-import com.hackaton.todayfit.model.Cloth;
-import com.hackaton.todayfit.model.Item;
+import com.hackaton.todayfit.dto.Item;
 import com.hackaton.todayfit.model.User;
 import com.hackaton.todayfit.repository.ClothCheckRepository;
-import com.hackaton.todayfit.repository.ClothRepository;
 import com.hackaton.todayfit.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -28,9 +24,9 @@ public class MyClothService {
     //체크
     @Transactional
     public void checkCloth(Item item, PrincipalDetails principal){
-        clothCheckRepository.deleteAll();
-        List<String> clothes = item.getClothes();
         User user = userRepository.findByEmail(principal.getUsername());
+        clothCheckRepository.deleteAllByUserId(user.getId());    //체크 저장소에 이전 체크 이력이 누적이 되기 때문에 모두 삭제.
+        List<String> clothes = item.getClothes();
         for (String cloth : clothes) {
             CheckCloth checkCloth = new CheckCloth();
             checkCloth.setClothAndUser(cloth,user);
