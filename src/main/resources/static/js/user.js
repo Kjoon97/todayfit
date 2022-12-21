@@ -19,6 +19,18 @@ let index ={
                email: $("#email").val(),
                region: $('#region').val()
          };
+         if(!data.nickname || data.nickname.trim() === "" || !data.password || data.password.trim() === "" || !data.email || data.email.trim() === ""){
+            alert("공백 또는 입력하지 않은 부분이 있습니다.")
+            return false;
+         } else if (!/(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\W)(?=\S+$).{8,16}/.test(data.password)) {
+            alert("비밀 번호는 8~16자 영문 대 소문자, 특수 문자를 사용하세요.");
+            $('#password').focus();
+            return false;
+         } else if (!/^[ㄱ-ㅎ가-힣a-z0-9-_]{2,10}$/.test(data.nickname)){
+            alert("닉네임은 특수문자를 제외한 2~10자리여야 합니다.");
+            $('#username').focus();
+            return false;
+         }
          console.log(data)
 
          //ajax 호출 default가 비동기 호출.
@@ -80,8 +92,30 @@ let index ={
                 }).fail(function(error){
                      alert(JSON.stringify(error));
                 });
-          },
+     }
 
 }
+
+function checkEmail(){
+    var email = $('#email').val();
+    $.ajax({
+        url:'/emailCheck',
+        type:'post',
+        data:{email:email},
+        success:function(cnt){
+            if(cnt == 0){
+                $('.email_ok').css("display","inline-block");
+                $('.email_already').css("display", "none");
+            } else {
+                $('.email_already').css("display","inline-block");
+                $('.email_ok').css("display", "none");
+                $('#email').val('');
+            }
+        }
+//        error:function(){
+//            alert("에러 입니다.");
+//        }
+    });
+};
 
 index.init();

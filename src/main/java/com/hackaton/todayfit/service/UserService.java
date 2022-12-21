@@ -57,4 +57,9 @@ public class UserService {
         persistenceUser.setterRegion(user.getRegion());
     }
 
+    //중복 이메일 체크
+    public int emailCheck(String email){
+        return userRepository.emailCheck(email);
+    }
+
 }

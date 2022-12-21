@@ -61,3 +61,12 @@ button.button_1 {
     cursor: pointer;
     border-radius: 5px;
   }
+.email_ok{
+    color:#008000;
+    display: none;
+}
+
+.email_already{
+    color:#6A82FB;
+    display: none;
+}

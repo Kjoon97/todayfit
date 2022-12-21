@@ -11,10 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +27,13 @@ public class UserApiController {
         userService.register(user); //회원가입 성공 시 1, 실패 시 -1 반환.
         System.out.println("user = " + user.getNickname());
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
+
+    //중복 회원 확인
+    @PostMapping("/emailCheck")
+    @ResponseBody
+    public int emailCheck(@RequestParam("email") String email){
+        return userService.emailCheck(email);
     }
 
     //회원 수정
