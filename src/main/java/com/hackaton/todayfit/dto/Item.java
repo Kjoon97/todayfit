@@ -1,4 +1,4 @@
-package com.hackaton.todayfit.model;
+package com.hackaton.todayfit.dto;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ public class Item {
     private Long id;
     private List<String> clothes;
 
-    public void updateClothes(List<String> clothes){
+    public void setterClothes(List<String> clothes){
         this.clothes = clothes;
     }
 }

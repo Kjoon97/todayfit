@@ -1,7 +1,7 @@
 package com.hackaton.todayfit.controller;
 
 import com.hackaton.todayfit.config.auth.PrincipalDetails;
-import com.hackaton.todayfit.model.Item;
+import com.hackaton.todayfit.dto.Item;
 import com.hackaton.todayfit.service.MyClothService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,11 +17,11 @@ public class MyClothController {
 
     private final MyClothService myClothService;
 
-    //상세보기
+    //나의 옷 조회
     @GetMapping("/my-clothes")
     public String myCloth(@ModelAttribute Item item,@AuthenticationPrincipal PrincipalDetails principal){
         List<String> categories = myClothService.findCategory(principal);
-        item.updateClothes(categories);
+        item.setterClothes(categories);
         return "myCloth";
     }
 
@@ -30,7 +30,7 @@ public class MyClothController {
     public String addForm(Model model, @AuthenticationPrincipal PrincipalDetails principal){
         List<String> categories = myClothService.findCategory(principal);
         Item item = new Item();
-        item.updateClothes(categories);
+        item.setterClothes(categories);
         model.addAttribute("item",item);
         return "addCloth";
     }

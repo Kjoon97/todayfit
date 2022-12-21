@@ -30,14 +30,17 @@ public class TodayClothController {
 
     @GetMapping("/today-clothes")
     public String todayClothes(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
-        Float temperature = todayClothService.getWeatherInfo(principal);
-        String region = todayClothService.getRegionInfo(principal);
+        Float temperature = todayClothService.getWeatherInfo(principal);  //기온 정보
+        String region = todayClothService.getRegionInfo(principal);      //지역 정보
         model.addAttribute("region",region);
         model.addAttribute("temp",temperature);
+
+        //추천 옷 리스트
         ArrayList<List<RecommendClothDTO>> recommendCloth = todayClothService.getRecommendCloth(temperature, principal);
         System.out.println("recommendCloth = " + recommendCloth);
-        model.addAttribute("tops", recommendCloth.get(0));
-        model.addAttribute("pants",recommendCloth.get(1));
+
+        model.addAttribute("tops", recommendCloth.get(0));   //상의
+        model.addAttribute("pants",recommendCloth.get(1));   //하의
         return "todayCloth";
     }
 }
