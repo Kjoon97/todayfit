@@ -25,7 +25,6 @@ public class UserController {
         ArrayList<RegionCode> regionCodes = new ArrayList<>();
         regionCodes.add(new RegionCode("Seoul","서울"));
         regionCodes.add(new RegionCode("Suwon","수원"));
-        regionCodes.add(new RegionCode("Uijeongbu","의정부"));
         regionCodes.add(new RegionCode("Chuncheon","춘천"));
         regionCodes.add(new RegionCode("Cheongju","청주"));
         regionCodes.add(new RegionCode("Incheon","인천"));

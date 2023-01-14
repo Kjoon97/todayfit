@@ -6,6 +6,7 @@ import com.hackaton.todayfit.model.Cloth;
 import com.hackaton.todayfit.repository.ClothCheckRepository;
 import com.hackaton.todayfit.repository.ClothRepository;
 import com.hackaton.todayfit.repository.UserRepository;
+import com.hackaton.todayfit.repository.WeatherRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +25,9 @@ class TodayClothServiceTest {
 
     @Autowired
     private ClothCheckRepository clothCheckRepository;
+
+    @Autowired
+    private WeatherRepository weatherRepository;
 
     @Autowired
     private Translate translate;
@@ -59,6 +63,12 @@ class TodayClothServiceTest {
         recommend.add(recommendTopClothes);
         recommend.add(recommendPantsClothes);
         System.out.println("recommend = " + recommend);
+    }
+
+    @Test
+    public void getTemp(){
+        float temp = weatherRepository.findTemp("Seoul");
+        System.out.println("temp = " + temp);
     }
 
 }

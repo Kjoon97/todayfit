@@ -2,6 +2,7 @@ package com.hackaton.todayfit;
 
 import com.hackaton.todayfit.model.Cloth;
 import com.hackaton.todayfit.repository.ClothRepository;
+import com.hackaton.todayfit.schedule.WeatherApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +16,13 @@ import java.util.List;
 public class InitDb {
 
     private final InitService initService;
+    private final WeatherApiService weatherApiService;
 
+    //첫 애플리케이션 실행 시
     @PostConstruct
     public void init(){
-        initService.dbInit();
+        initService.dbInit();                 //db 초기화
+        weatherApiService.getWeatherInfo();   //api에서 날씨 데이터 받기.
     }
 
     @Component
