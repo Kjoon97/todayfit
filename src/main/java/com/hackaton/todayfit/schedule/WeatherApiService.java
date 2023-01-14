@@ -8,6 +8,7 @@ import com.hackaton.todayfit.repository.UserRepository;
 import com.hackaton.todayfit.repository.WeatherRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,8 @@ public class WeatherApiService {
 
     private final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
     private final WeatherRepository weatherRepository;
-    private final String apiKey = "9bed50423a4dfdaa3ef1ba25fd9bc7e1"; // 발급받은 API key
+    @Value("${openWeatherMap-api-key}")
+    private String apiKey; // 발급받은 API key - properties 파일에 저장.
 
     @Transactional
     public void getWeatherInfo(){
